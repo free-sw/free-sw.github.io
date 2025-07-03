@@ -1,1 +1,136 @@
-<a href="index.html">hi</a>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地黄页 Directory</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('image.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .search-box {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .search-box input {
+            width: 60%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .category {
+            margin-bottom: 30px;
+        }
+        .category h2 {
+            color: #444;
+            border-bottom: 2px solid #666;
+            padding-bottom: 10px;
+        }
+        .business-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .business-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .business-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .business-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>本地企业黄页</h1>
+        
+        <div class="search-box">
+            <input type="text" placeholder="搜索企业、行业或服务...">
+            <button>搜索</button>
+        </div>
+        
+        <div class="category">
+            <h2>餐饮美食</h2>
+            <div class="business-list">
+                <div class="business-card">
+                    <h3>阳光餐厅</h3>
+                    <p>地址：幸福路123号</p>
+                    <p>电话：010-12345678</p>
+                    <p>经营范围：中餐、家常菜</p>
+                </div>
+                <div class="business-card">
+                    <h3>蓝海咖啡</h3>
+                    <p>地址：文化路45号</p>
+                    <p>电话：010-87654321</p>
+                    <p>经营范围：咖啡、甜点、简餐</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <h2>医疗健康</h2>
+            <div class="business-list">
+                <div class="business-card">
+                    <h3>社区医院</h3>
+                    <p>地址：健康路78号</p>
+                    <p>电话：010-56789012</p>
+                    <p>经营范围：全科医疗、预防保健</p>
+                </div>
+                <div class="business-card">
+                    <h3>康复理疗中心</h3>
+                    <p>地址：和平街16号</p>
+                    <p>电话：010-23456789</p>
+                    <p>经营范围：推拿、针灸、康复治疗</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category">
+            <h2>零售购物</h2>
+            <div class="business-list">
+                <div class="business-card">
+                    <h3>便民超市</h3>
+                    <p>地址：便民巷8号</p>
+                    <p>电话：010-90123456</p>
+                    <p>经营范围：日用百货、食品</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
