@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>白嫖站-薅羊毛大作战</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f8ff;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 90%;
+            height: 80%;
+            background-color: #e6f7ff;
+            border: 2px solid #1890ff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .wool {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23ffffff"/><circle cx="50" cy="50" r="30" fill="%23f5f5f5"/><circle cx="50" cy="50" r="20" fill="%23eeeeee"/></svg>');
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .wool:hover {
+            transform: scale(1.1);
+        }
+        
+        .scoreboard {
+            margin: 20px 0;
+            font-size: 24px;
+            color: #1890ff;
+        }
+        
+        .controls {
+            margin-top: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1890ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        
+        button:hover {
+            background-color: #096dd9;
+        }
+        
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #ff4d4f;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>白嫖站-薅羊毛大作战</h1>
+   <p>喜欢白嫖，一定也喜欢薅羊毛～～～</p>
+    <div class="scoreboard">
+        得分: <span id="score">0</span> | 时间: <span id="time">30</span>秒
+    </div>
+    <div class="game-container" id="gameContainer">
+        <div class="game-over" id="gameOver">游戏结束!</div>
+    </div>
+    <div class="controls">
+        <button id="startBtn">开始游戏</button>
+        <button id="resetBtn" disabled>重置游戏</button>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('gameContainer');
+        const scoreElement = document.getElementById('score');
+        const timeElement = document.getElementById('time');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const gameOverElement = document.getElementById('gameOver');
+        
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let woolInterval;
+        let isPlaying = false;
+        
+        // 开始游戏
+        startBtn.addEventListener('click', startGame);
+        // 重置游戏
+        resetBtn.addEventListener('click', resetGame);
+        
+        function startGame() {
+            if (isPlaying) return;
+            
+            isPlaying = true;
+            startBtn.disabled = true;
+            resetBtn.disabled = false;
+            gameOverElement.style.display = 'none';
+            
+            // 重置分数和时间
+            score = 0;
+            timeLeft = 30;
+            scoreElement.textContent = score;
+            timeElement.textContent = timeLeft;
+            
+            // 开始计时
+            gameInterval = setInterval(updateTime, 1000);
+            
+            // 生成羊毛
+            spawnWool();
+            woolInterval = setInterval(spawnWool, 800);
+        }
+        
+        function updateTime() {
+            timeLeft--;
+            timeElement.textContent = timeLeft;
+            
+            // 加快羊毛出现速度
+            if (timeLeft % 10 === 0 && timeLeft > 0) {
+                clearInterval(woolInterval);
+                woolInterval = setInterval(spawnWool, Math.max(300, 800 - (30 - timeLeft) * 50));
+            }
+            
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }
+        
+        function spawnWool() {
+            if (!isPlaying) return;
+            
+            const wool = document.createElement('div');
+            wool.classList.add('wool');
+            const maxX = gameContainer.clientWidth - 50;
+            const maxY = gameContainer.clientHeight - 50;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            wool.style.left = `${x}px`;
+            wool.style.top = `${y}px`;
+            
+            // 点击羊毛得分
+            wool.addEventListener('click', () => {
+                score++;
+                scoreElement.textContent = score;
+                wool.remove();
+            });
+            
+            gameContainer.appendChild(wool);
+            
+            // 自动消失
+            setTimeout(() => {
+                if (wool.parentNode) {
+                    wool.remove();
+                }
+            }, 1500);
+        }
+        
+        function endGame() {
+            isPlaying = false;
+            clearInterval(gameInterval);
+            clearInterval(woolInterval);
+            gameOverElement.style.display = 'block';
+            startBtn.disabled = false;
+            
+            // 清除所有羊毛
+            const wools = document.querySelectorAll('.wool');
+            wools.forEach(wool => wool.remove());
+        }
+        
+        function resetGame() {
+            endGame();
+            score = 0;
+            timeLeft = 30;
+            scoreElement.textContent = score;
+            timeElement.textContent = timeLeft;
+            resetBtn.disabled = true;
+        }
+    </script>
+<footer>
+<p>白嫖站-薅羊毛大作战-本站暂未备案</p>
+<a href="index.html">回到导航页</a>
+</footer>
+</body>
+</html>
