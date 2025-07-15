@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单塔防游戏示例</title>
+    <style>
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+        }
+
+        #path {
+            position: absolute;
+            background-color: brown;
+            width: 20px;
+            height: 400px;
+            left: 100px;
+            top: 100px;
+        }
+
+        #tower {
+            position: absolute;
+            background-color: green;
+            width: 50px;
+            height: 50px;
+            left: 150px;
+            top: 150px;
+        }
+
+        #enemy {
+            position: absolute;
+            background-color: red;
+            width: 30px;
+            height: 30px;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="path"></div>
+        <div id="tower"></div>
+        <div id="enemy"></div>
+    </div>
+    <script>
+        // 这里可以编写控制敌人移动、塔攻击等逻辑的JavaScript代码
+        let enemy = document.getElementById('enemy');
+        let tower = document.getElementById('tower');
+
+        function moveEnemy() {
+            // 简单模拟敌人沿着路径移动
+            let enemyLeft = parseInt(enemy.style.left) + 1;
+            enemy.style.left = enemyLeft + 'px';
+        }
+
+        setInterval(moveEnemy, 10);
+    </script>
+</body>
+
+</html>
